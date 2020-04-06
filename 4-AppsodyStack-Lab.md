@@ -1,16 +1,6 @@
 # Customize an existing Appsody stack
 
-
-
-
-
-![image-20200406173312287](/Users/phil/Library/Application Support/typora-user-images/image-20200406173312287.png)
-
-
-
-
-
-
+![image-20200406211104217](images/image-20200406211104217-6200264.png)
 
 Developers use stacks to simplify building applications that require a specific set of technologies or development patterns. While there are numerous publicly available stacks to choose from, many enterprises want to build their own set of stacks that uphold their specific requirements and standards for how they want to their developers to build cloud native applications.
 

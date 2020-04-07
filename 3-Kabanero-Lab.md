@@ -706,6 +706,16 @@ You successfully installed and used Appsody, Kabanero and Codewind ! You used mo
 
 
 
+
+
+
+
+
+
+
+
+
+
 ## Appendix - Get the certificate (registry security)
 
 Instead of copying the certificate (**client-ca.crt** from the GitHub or from the master in **/etc/origin/node/client-ca.crt** ), you can also import the certificate by using **FireFox**.

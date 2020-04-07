@@ -28,7 +28,7 @@ The OpenShift platform that we are going to use has been built on IBM Cloud.
 
 Type your User ID password and click Login button given by the **instructor**:
 
-![image-20190118104419179](../../../../Hybrid/-Workshop/2020-02%20HybridClouds/Labs/images/image-20190118104419179-7804659.png)
+![image-20200407102322823](images/image-20200407102322823-6247802.png)
 
 You should see the following **Dashboard**:
 

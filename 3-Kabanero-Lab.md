@@ -608,8 +608,6 @@ oc project
 Using project "labproj99" on server "https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443".
 ```
 
-Your OpenShift registry is located at : **docker-registry-default.apps.<infraIP@>.xip.io**
-
 In your application directory **newappproj**, login to your Docker registry in your cluster:
 
 ``` 

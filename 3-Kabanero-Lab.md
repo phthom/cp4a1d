@@ -656,39 +656,36 @@ Results (example)
 
 ```
 ...
-Successfully built e205b6314730
-[Docker] Successfully tagged docker-registry-default.apps.158.176.135.51.xip.io/labproj01/mynewapp:latest
-Pushing image docker-registry-default.apps.158.176.135.51.xip.io/labproj01/mynewapp
-Built docker image docker-registry-default.apps.158.176.135.51.xip.io/labproj01/mynewapp
+[Docker] Successfully built e833880d4c08
+[Docker] Successfully tagged default-route-openshift-image-registry.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud/labproj99/mynewapp:latest
+Pushing image default-route-openshift-image-registry.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud/labproj99/mynewapp
+Built docker image default-route-openshift-image-registry.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud/labproj99/mynewapp
 Found existing deployment manifest /Users/phil/codewind-workspace/mynewapp/app-deploy.yaml
 Updated existing deployment manifest /Users/phil/codewind-workspace/mynewapp/app-deploy.yaml
 Attempting to get resource from Kubernetes ...
-Running command: kubectl get pods -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.namespace}' --all-namespaces
+Running command: kubectl get pods "-o=jsonpath='{.items[?(@.metadata.labels.name==\"appsody-operator\")].metadata.namespace}'" --all-namespaces
 Attempting to get resource from Kubernetes ...
-Running command: kubectl get deployments -o=jsonpath='{.items[?(@.metadata.name=="appsody-operator")].metadata.namespace}' -n adminproj
+Running command: kubectl get deployments "-o=jsonpath='{.items[?(@.metadata.name==\"appsody-operator\")].metadata.namespace}'" -n openshift-operators
 Attempting to get resource from Kubernetes ...
-Running command: kubectl get pod -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.name}' -n adminproj
+Running command: kubectl get pod "-o=jsonpath='{.items[?(@.metadata.labels.name==\"appsody-operator\")].metadata.name}'" -n openshift-operators
 Attempting to get resource from Kubernetes ...
-Running command: kubectl exec -n adminproj -it appsody-operator-67dfc7bc59-5xxch -- /bin/printenv WATCH_NAMESPACE
+Running command: kubectl exec -n openshift-operators -it appsody-operator-849cd8b475-zmtjc -- /bin/printenv WATCH_NAMESPACE
+An operator exists in namespace openshift-operators, that is watching all namespaces
 Attempting to apply resource in Kubernetes ...
-Running command: kubectl apply -f /Users/phil/codewind-workspace/theapp/app-deploy.yaml --namespace labproj01
-Appsody Deployment name is: theapp
-Running command: kubectl get rt theapp -o jsonpath="{.status.url}" --namespace labproj01
+Running command: kubectl apply -f /Users/phil/codewind-workspace/mynewapp/app-deploy.yaml --namespace labproj99
+Appsody Deployment name is: mynewapp
+Running command: kubectl get rt mynewapp -o "jsonpath=\"{.status.url}\"" --namespace labproj99
 Attempting to get resource from Kubernetes ...
-Running command: kubectl get route theapp -o jsonpath={.status.ingress[0].host} --namespace labproj01
-Deployed project running at mynewapp-labproj01.apps.158.176.135.51.xip.io
+Running command: kubectl get route mynewapp -o "jsonpath={.status.ingress[0].host}" --namespace labproj99
+Deployed project running at mynewapp-labproj99.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud
 ```
-
-
-
-> If you receive an error message with X509,  you must add the **client-ca.crt** certificate on your system. This file is in the github in the same repository. Be sure to restart Docker after adding the certificate.
 
 
 
 You can now get access to your application by using the URL from the last message of the deploy:
 
 ```https
-http://mynewapp-labproj<xx>.apps....
+http:// mynewapp-labproj99.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud
 ```
 
  ![image-20191012185518963](images/image-20191012185518963-0899319.png)

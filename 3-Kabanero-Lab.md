@@ -613,25 +613,27 @@ Your OpenShift registry is located at : **docker-registry-default.apps.<infraIP@
 In your application directory **newappproj**, login to your Docker registry in your cluster:
 
 ``` 
-docker login docker-registry-default.apps.<infraIP>.xip.io -u openshift -p $(oc whoami -t) 
+HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
+echo $HOST
+docker login $HOST -u openshift -p $(oc whoami -t) 
 ```
 
 Example:
 
-```
-docker login docker-registry-default.apps.158.176.105.11.xip.io -u openshift -p $(oc whoami -t) 
-```
-
-Results:
-
 ```bash
+# HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
+# echo $HOST
+default-route-openshift-image-registry.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud
+
+# docker login $HOST -u openshift -p $(oc whoami -t) 
+ docker login $HOST -u openshift -p $(oc whoami -t)
 WARNING! Using --password via the CLI is insecure. Use --password-stdin.
 Login Succeeded
 ```
 
 
 
-> If you receive an error message with X509,  you must add the **client-ca.crt** certificate on your system. This file is in the github in the same repository. 
+> If you receive an error message with X509,  you must add the **client-ca.crt** certificate on your system. This file is in the github in the same repository. See the appendix at the end.
 
 
 
@@ -647,7 +649,7 @@ cd codewind-workspace/mynewapp
 Now you can deploy your appliocation to the remote OpenShift cluster in your project (**change xx** with your number)
 
 ```bash
-appsody deploy -t docker-registry-default.apps.<infraIP@>.xip.io/labproj<xx>/mynewapp --push --pull-url docker-registry.default.svc:5000 -n labproj<xx>
+appsody deploy -t $HOST/labproj<xx>/mynewapp --push --pull-url image-registry.openshift-image-registry.svc:5000 -n labproj<xx>
 ```
 
 
@@ -685,10 +687,10 @@ Deployed project running at mynewapp-labproj01.apps.158.176.135.51.xip.io
 
 
 
-You can now get access to your application:
+You can now get access to your application by using the URL from the last message of the deploy:
 
 ```https
-http://mynewapp-labproj<xx>.apps.<infraIP@>.xip.io
+http://mynewapp-labproj<xx>.apps....
 ```
 
  ![image-20191012185518963](images/image-20191012185518963-0899319.png)

@@ -69,7 +69,7 @@ When you run the `appsody stack create` command, the *nodejs-express* stack is c
 
 ```bash
 cd ~
-cd my	
+appsody stack create my-nodejs-express --copy incubator/nodejs-express
 cd my-nodejs-express
 ls -al
 ```

@@ -213,7 +213,7 @@ In the middle of the screen, there is a list of links under instance:
 Take a note of the **Appsody Hub** that will be needed in the next steps. It looks like this:
 
 ``` http
-https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.3/kabanero-stack-hub-index.yaml
+https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.5/kabanero-stack-hub-index.yaml
 ```
 
 
@@ -239,7 +239,7 @@ oc login --token=pCUnhtWtWs8H4FtcJmbPvvSFpXVaJFX7vacibBJSW1A --server=https://c1
 Add your Kabanero Collection Hub Repository in the Appsody configuration:
 
 ```
-appsody repo add kabanero https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.3/kabanero-stack-hub-index.yaml
+appsody repo add kabanero https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.5/kabanero-stack-hub-index.yaml
 ```
 
 List all your Collections:
@@ -256,7 +256,7 @@ appsody list kabanero
 REPO    	ID               	VERSION  	TEMPLATES        	DESCRIPTION                                              
 kabanero	java-microprofile	0.2.26   	*default         	Eclipse MicroProfile on Open Liberty & OpenJ9 using Maven
 kabanero	java-openliberty 	0.2.3    	*default         	Open Liberty & OpenJ9 using Maven                        
-kabanero	java-spring-boot2	0.3.24   	*default, kotlin 	Spring Boot using OpenJ9 and Maven                       
+kabanero	java-spring-boot2	0.3.28   	*default, kotlin 	Spring Boot using OpenJ9 and Maven                       
 kabanero	nodejs           	0.3.3    	*simple          	Runtime for Node.js applications                         
 kabanero	nodejs-express   	0.2.10   	scaffold, *simple	Express web framework for Node.js      
 ```
@@ -293,7 +293,7 @@ appsody repo list
 NAME        	URL                                                                                                    
 *incubator  	https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml                        
 experimental	https://github.com/appsody/stacks/releases/latest/download/experimental-index.yaml                     
-kabanero    	https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.3/kabanero-stack-hub-index.yaml
+kabanero    	https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.5/kabanero-stack-hub-index.yaml
 ```
 
 You can see all the stacks by using the following commands:
@@ -326,7 +326,7 @@ experimental	vertx                    	0.1.4    	*default         	Eclipse Vert.
 *incubator  	swift                    	0.2.6    	*simple          	Appsody runtime for Swift applications                   
 kabanero    	java-microprofile        	0.2.26   	*default         	Eclipse MicroProfile on Open Liberty & OpenJ9 using Maven
 kabanero    	java-openliberty         	0.2.3    	*default         	Open Liberty & OpenJ9 using Maven                        
-kabanero    	java-spring-boot2        	0.3.24   	*default, kotlin 	Spring Boot using OpenJ9 and Maven                       
+kabanero    	java-spring-boot2        	0.3.28   	*default, kotlin 	Spring Boot using OpenJ9 and Maven                       
 kabanero    	nodejs                   	0.3.3    	*simple          	Runtime for Node.js applications                         
 kabanero    	nodejs-express           	0.2.10   	scaffold, *simple	Express web framework for Node.js                   
 ```
@@ -652,7 +652,7 @@ appsody deploy -t $HOST/labproj<xx>/mynewapp --push --pull-url image-registry.op
 
 
 
-Results (example)
+Results (example) : **it can take a few minutes**
 
 ```
 ...
@@ -707,78 +707,6 @@ You successfully installed and used Appsody, Kabanero and Codewind ! You used mo
 
 
 
-
-
-
-
-
-
-
-
-
-## Appendix - Get the certificate (registry security)
-
-Instead of copying the certificate (**client-ca.crt** from the GitHub or from the master in **/etc/origin/node/client-ca.crt** ), you can also import the certificate by using **FireFox**.
-
-
-
-Folow the steps:
-
-1- Open a **FireFox** browser and type the following URL (don't forget the /v2 at the end) :
-
-```
-https://docker-registry-default.apps.<infraIP@>.xip.io/v2
-```
-
-![image-20200229145302968](images/image-20200229145302968.png)
-
-A message showing UNAUTHORIZED will appear.
-
-
-
-2- Click on the **locker**
-
-![image-20200229145738625](images/image-20200229145738625-2984658.png)
-
-
-
-3- Click on **Connection not secure**
-
-![image-20200229145830622](images/image-20200229145830622-2984710.png)
-
-
-
-
-
-4- Click on **More information**
-
-![image-20200229150032447](images/image-20200229150032447-2984832.png)
-
-5- Click on **View Certificate**
-
-![image-20200229150255926](images/image-20200229150255926-2984976.png)
-
-
-
-6- Click on Download PEM(cert)
-
-![image-20200229150346039](images/image-20200229150346039-2985026.png) 
-
-
-
-7- Then Save
-
-![image-20200229150514100](images/image-20200229150514100-2985114.png)
-
-
-
-8- Then **Double-Click on the pem file** and add it to the security system.
-
-Depending on the OS used (Windows or MacOS), the procedure will vary.
-
-
-
-9- **Restart Docker** and **restart your terminal** (or command line window)
 
 
 

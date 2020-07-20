@@ -1,3 +1,5 @@
+
+
 # Customize an existing Appsody stack
 
 ![image-20200406211104217](images/image-20200406211104217-6200264.png)
@@ -115,7 +117,7 @@ You should see output similar to the following:
 $ appsody list dev.local
 
 REPO     	ID               	VERSION  	TEMPLATES        	DESCRIPTION                      
-dev.local	my-nodejs-express	0.4.6    	scaffold, *simple	Express web framework for Node.js
+dev.local	my-nodejs-express	0.4.13    	scaffold, *simple	Express web framework for Node.js
 ```
 
 
@@ -389,4 +391,7 @@ As you should see, because the stack now incorporates helmet, the HTTP headers h
 
 **Congratulations**! You have successfully built and tested a modified stack — and seen how applications built against the stack automatically gain the (new) features it provides (without the application developer having to do anything themselves). You might just want to use this stack within our enterprise – or alternatively consider submitting your new stack to the Appsody open source project if you think it would be useful to application developers more broadly.
 
-- 
+
+
+#End of Lab
+

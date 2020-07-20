@@ -2,7 +2,7 @@
 
 # TEKTON Pipeline LAB
 
-![image-20200314031223750](/Users/phil/Library/Application Support/typora-user-images/image-20200314031223750.png)
+![image-20200720135840579](images/image-20200720135840579-5246320.png)
 
 Duration : 30 minutes
 

@@ -213,7 +213,7 @@ In the middle of the screen, there is a list of links under instance:
 Take a note of the **Appsody Hub** that will be needed in the next steps. It looks like this:
 
 ``` http
-https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.5/kabanero-stack-hub-index.yaml
+https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
 ```
 
 
@@ -253,12 +253,13 @@ Results:
 ``` bash
 appsody list kabanero
 
-REPO    	ID               	VERSION  	TEMPLATES        	DESCRIPTION                                              
-kabanero	java-microprofile	0.2.26   	*default         	Eclipse MicroProfile on Open Liberty & OpenJ9 using Maven
-kabanero	java-openliberty 	0.2.3    	*default         	Open Liberty & OpenJ9 using Maven                        
-kabanero	java-spring-boot2	0.3.28   	*default, kotlin 	Spring Boot using OpenJ9 and Maven                       
-kabanero	nodejs           	0.3.3    	*simple          	Runtime for Node.js applications                         
-kabanero	nodejs-express   	0.2.10   	scaffold, *simple	Express web framework for Node.js      
+REPO    	ID               	VERSION  	TEMPLATES               	DESCRIPTION                                                 
+kabanero	java-openliberty 	0.2.12   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
+        	                 	         	                        	using Maven                                                 
+kabanero	java-spring-boot2	0.3.29   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
+kabanero	nodejs           	0.3.6    	*simple                 	Runtime for Node.js applications                            
+kabanero	nodejs-express   	0.4.8    	kafka, scaffold, *simple	Express web framework for Node.js                           
+kabanero	quarkus          	0.3.6    	*default, kafka         	Quarkus runtime for running Java applications               
 ```
 
 
@@ -292,8 +293,9 @@ appsody repo list
 
 NAME        	URL                                                                                                    
 *incubator  	https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml                        
+dev.local   	file:///Users/phil/.appsody/stacks/dev.local/dev.local-index.yaml                                      
 experimental	https://github.com/appsody/stacks/releases/latest/download/experimental-index.yaml                     
-kabanero    	https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.5/kabanero-stack-hub-index.yaml
+kabanero    	https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
 ```
 
 You can see all the stacks by using the following commands:
@@ -305,30 +307,36 @@ appsody list
 Results:
 
 ```bash
-REPO        	ID                       	VERSION  	TEMPLATES        	DESCRIPTION                                              
-experimental	go-modules               	0.1.0    	*default         	Runtime for Go using Go 1.11+ modules for dependencies   
-experimental	java-spring-boot2-liberty	0.1.11   	*default         	Spring Boot on Open Liberty & OpenJ9 using Maven         
-experimental	nodejs-functions         	0.2.0    	*simple          	Serverless runtime for Node.js functions                 
-experimental	quarkus                  	0.2.3    	*default         	Quarkus runtime for running Java applications            
-experimental	rocket                   	0.1.0    	*simple          	Rocket web framework for Rust                            
-experimental	rust                     	0.1.6    	*simple          	Runtime for Rust applications                            
-experimental	vertx                    	0.1.4    	*default         	Eclipse Vert.x runtime for running Java applications     
-*incubator  	java-microprofile        	0.2.24   	*default         	Eclipse MicroProfile on Open Liberty & OpenJ9 using Maven
-*incubator  	java-openliberty         	0.2.5    	*default         	Open Liberty & OpenJ9 using Maven                        
-*incubator  	java-spring-boot2        	0.3.28   	*default, kotlin 	Spring Boot using OpenJ9 and Maven                       
-*incubator  	kitura                   	0.2.6    	*default         	Runtime for Kitura applications                          
-*incubator  	node-red                 	0.1.2    	*simple          	Node-RED runtime for running flows                       
-*incubator  	nodejs                   	0.3.5    	*simple          	Runtime for Node.js applications                         
-*incubator  	nodejs-express           	0.4.6    	scaffold, *simple	Express web framework for Node.js                        
-*incubator  	nodejs-loopback          	0.3.0    	*scaffold        	LoopBack 4 API Framework for Node.js                     
-*incubator  	python-flask             	0.2.3    	*simple          	Flask web Framework for Python                           
-*incubator  	starter                  	0.1.3    	*simple          	Runnable starter stack, copy to create a new stack       
-*incubator  	swift                    	0.2.6    	*simple          	Appsody runtime for Swift applications                   
-kabanero    	java-microprofile        	0.2.26   	*default         	Eclipse MicroProfile on Open Liberty & OpenJ9 using Maven
-kabanero    	java-openliberty         	0.2.3    	*default         	Open Liberty & OpenJ9 using Maven                        
-kabanero    	java-spring-boot2        	0.3.28   	*default, kotlin 	Spring Boot using OpenJ9 and Maven                       
-kabanero    	nodejs                   	0.3.3    	*simple          	Runtime for Node.js applications                         
-kabanero    	nodejs-express           	0.2.10   	scaffold, *simple	Express web framework for Node.js                   
+appsody list
+
+REPO        	ID                            	VERSION  	TEMPLATES               	DESCRIPTION                                                 
+dev.local   	my-nodejs-express             	0.4.13   	kafka, scaffold, *simple	Secure express web framework for Node.js                    
+experimental	go-modules                    	0.1.0    	*default                	Runtime for Go using Go 1.11+ modules for dependencies      
+experimental	java-spring-boot2-liberty     	0.1.11   	*default                	Spring Boot on Open Liberty & OpenJ9 using Maven            
+experimental	nodejs-functions              	0.2.1    	*simple                 	Serverless runtime for Node.js functions                    
+experimental	rocket                        	0.1.1    	*simple                 	Rocket web framework for Rust                               
+experimental	rust                          	0.3.0    	*simple                 	Runtime for Rust applications                               
+experimental	rust-tide                     	0.3.0    	*default                	Tide web framework for Rust                                 
+experimental	vertx                         	0.1.4    	*default                	Eclipse Vert.x runtime for running Java applications        
+*incubator  	java-microprofile [Deprecated]	0.2.27   	*default                	Eclipse MicroProfile on Open Liberty & OpenJ9 using Maven   
+*incubator  	java-openliberty              	0.2.15   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
+            	                              	         	                        	using Maven                                                 
+*incubator  	java-spring-boot2             	0.3.30   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
+*incubator  	kitura                        	0.2.6    	*default                	Runtime for Kitura applications                             
+*incubator  	node-red                      	0.1.3    	*simple                 	Node-RED runtime for running flows                          
+*incubator  	nodejs                        	0.4.0    	*simple                 	Runtime for Node.js applications                            
+*incubator  	nodejs-express                	0.4.13   	kafka, scaffold, *simple	Express web framework for Node.js                           
+*incubator  	nodejs-loopback               	0.3.0    	*scaffold               	LoopBack 4 API Framework for Node.js                        
+*incubator  	python-flask                  	0.2.4    	*simple                 	Flask web Framework for Python                              
+*incubator  	quarkus                       	0.5.1    	*default, kafka         	Quarkus runtime for running Java applications               
+*incubator  	starter                       	0.1.3    	*simple                 	Runnable starter stack, copy to create a new stack          
+*incubator  	swift                         	0.3.0    	*simple                 	Appsody runtime for Swift applications                      
+kabanero    	java-openliberty              	0.2.12   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
+            	                              	         	                        	using Maven                                                 
+kabanero    	java-spring-boot2             	0.3.29   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
+kabanero    	nodejs                        	0.3.6    	*simple                 	Runtime for Node.js applications                            
+kabanero    	nodejs-express                	0.4.8    	kafka, scaffold, *simple	Express web framework for Node.js                           
+kabanero    	quarkus                       	0.3.6    	*default, kafka         	Quarkus runtime for running Java applications      
 ```
 
 
@@ -351,8 +359,8 @@ Create a new directory for your project:
 
 ```bash
 cd
-mkdir codewind-workspace
-cd codewind-workspace
+mkdir myprojects
+cd myprojects
 mkdir mynewapp
 cd mynewapp
 ```
@@ -370,7 +378,7 @@ Results:
 No stack requirements set. Skipping...
 Running appsody init...
 Downloading nodejs-express template project from https://github.com/kabanero-io/collections/releases/download/0.6.3/nodejs-express.v0.2.10.templates.simple.tar.gz
-Download complete. Extracting files from /Users/phil/codewind-workspace/mynewapp/nodejs-express.tar.gz
+Download complete. Extracting files from /Users/phil/myprojects/mynewapp/nodejs-express.tar.gz
 Setting up the development environment
 Your Appsody project name has been set to mynewapp
 Pulling docker image docker.io/kabanero/nodejs-express:0.2
@@ -406,13 +414,18 @@ Results
 Looking at the **app.js** file in detail, it contains the following:
 
 ```javascript
-const app = require('express')()
+  // Use options.server to access http.Server. Example with socket.io:
+  //     const io = require('socket.io')(options.server)
+  const app = require('express')()
 
-app.get('/', (req, res) => {
-  res.send("Hello from Appsody!");
-});
+  app.get('/', (req, res) => {
+    // Use req.log (a `pino` instance) to log JSON:
+    req.log.info({message: 'Hello from Appsody!'});
+    res.send('Hello from Appsody!');
+  });
 
-module.exports.app = app;
+  return app;
+};
 ```
 
 This creates an instance of an Express.js application, and then registers a handler for `get()` requests on `/`that `send()` a response of `"Hello from Appsody!"`.
@@ -422,7 +435,7 @@ And the **package.json** contains all the dependencies for your app.js:
 ```json
 {
   "name": "nodejs-express-simple",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Simple Node.js Express application",
   "license": "Apache-2.0",
   "main": "app.js",
@@ -436,7 +449,7 @@ And the **package.json** contains all the dependencies for your app.js:
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "~6.1.0",
+    "mocha": "^7.1.1",
     "request": "^2.88.0"
   }
 }
@@ -461,7 +474,7 @@ Running command: docker pull docker.io/kabanero/nodejs-express:0.2
 Digest: sha256:e146ec0b008cd122f3c87b50e2d69102141f71dfd44239d1dbaeac97d06737a0
 Status: Image is up to date for kabanero/nodejs-express:0.2
 docker.io/kabanero/nodejs-express:0.2
-Running command: docker run --rm -p 3000:3000 -p 8080:8080 -p 9229:9229 --name mynewapp -v /Users/phil/codewind-workspace/mynewapp/:/project/user-app -v appsody-mynewapp-20200405184514.77100800:/project/user-app/node_modules -v appsody-controller-0.3.4:/.appsody -t --entrypoint /.appsody/appsody-controller docker.io/kabanero/nodejs-express:0.2 "--mode=run"
+Running command: docker run --rm -p 3000:3000 -p 8080:8080 -p 9229:9229 --name mynewapp -v /Users/phil/myprojects/mynewapp/:/project/user-app -v appsody-mynewapp-20200405184514.77100800:/project/user-app/node_modules -v appsody-controller-0.3.4:/.appsody -t --entrypoint /.appsody/appsody-controller docker.io/kabanero/nodejs-express:0.2 "--mode=run"
 [Container] Running APPSODY_PREP command: npm install --prefix user-app
 added 170 packages from 578 contributors and audited 295 packages in 4.323s
 [Container] found 1 low severity vulnerability
@@ -509,59 +522,75 @@ If you don't have **Visual Studio Code** on your laptop, go to that link (the in
 
 Then you can **install Codewind** as an extension of Visual Studio Code.
 
-Install Codewind from the **VS Code Marketplace**, or by searching for Codewind in the **VS Code Extensions view.**
+Install Codewind from the **VS Code Marketplace**, or by searching for Codewind in the **VS Code Extensions view.** (See below)
 
-![image-20200405184823517](images/image-20200405184823517-6105303.png)
+![image-20200915115207531](images/image-20200915115207531-0163527.png)
 
-If you’re going to work on Java projects, also install the Java Extension Pack.
+Click on install for the **latest Codewind** version. 
 
 Codewind requires the installation of **additional Docker images** to run. Choose Install when prompted to complete the installation. The installation may take a few minutes to complete.
 
 Codewind creates a folder called **codewind-workspace** within your **home directory** (C:\codewind-workspace on Windows or /Users/xxx on MacOS) to contain your projects. When the installation is complete, you can open the codewind-workspace folder or a project within the workspace as your VS Code workspace. The tools offer to open the workspace for you if it’s not open already.
 
-You will see Codewind at the bottom left part of the screen.
+![image-20200915115355006](images/image-20200915115355006-0163635.png)
 
-![image-20200405185202783](images/image-20200405185202783-6105522.png)
+You will see Codewind at the bottom left part of the screen. Click on CodeWind:
 
-To work with an existing project, right-click the *Projects (Local)* item and select **Add Existing Project**, or click on the *link* icon beside the *Projects (Local)* item. Note that the project must already exist within the `codewind-workspace` folder.
+![image-20200915120214046](images/image-20200915120214046-0164134.png)
+
+
+
+Start the local connection to docker by clicking on the button on the right side of local:
+
+![image-20200915120456737](images/image-20200915120456737-0164296.png) 
+
+Then Click on **No Projects** to create a new project: and then choose **Kabanero** hub.
+
+Then select **Kabanero Node.js Express simple template** in the **Kabanero** hub
+
+![image-20200915120922239](images/image-20200915120922239-0164562.png)
+
+Finally type a name for your project like **myapp** and put it in a **directory** of you choice.
+
+![image-20200915121538743](images/image-20200915121538743-0164938.png)
 
 
 
 ##Task #7 - Managing your project 
 
-Click on the link icon and choose mynewapp and then click OK. 
+You should see your application building automatically:
 
-![image-20191012183734136](images/image-20191012183734136-0898254.png)
+![image-20200915121629421](images/image-20200915121629421-0164989.png)
 
-After a few seconds, your project is now associated to Codewind:
+After a few seconds, your cloud native application should be building and running: you can look at the log during the building:
 
-![image-20191012184031892](images/image-20191012184031892-0898431.png)
+![image-20200915121903095](images/image-20200915121903095-0165143.png)
 
 As you can see your code is running and of course the build has been done successfully. 
 
-Move your cursor on mynewapp line and click on the end point to get access to the application:
+![image-20200915142431396](images/image-20200915142431396-0172671.png)
 
-![image-20191012184249203](images/image-20191012184249203-0898569.png) 
+Move your cursor on mynodeapp (running) item and click on the end point to get access to the application:
 
-A browser session will open shortly:
+ A browser session will open shortly:
 
 ![image-20191012184442854](images/image-20191012184442854-0898682.png)
 
 Now you can navigate on the left top pane to locate the project (mynewapp) and the program (app.js), click on the program (it will appear in the right pane):
 
-![image-20191012184723621](images/image-20191012184723621-0898843.png)
+![image-20200915142717652](images/image-20200915142717652-0172837.png)
 
-Change the "Hello from Appsody" by "**Hello from Philippe !!!**"or any message of your choice. 
+Change the "Hello from Appsody" by "**Hello from Philippe !**"or any message of your choice. 
 
-![image-20200405185509869](images/image-20200405185509869-6105710.png)
+![image-20200915142642762](images/image-20200915142642762-0172802.png)
 
 Save your project. Automatically a new build of your project is started and you change is operational:
 
 ![image-20191012185518963](images/image-20191012185518963-0899319.png)
 
-Now let do some experiments, **right click** on **mynewapp** project in Codewind:
+Now let do some experiments, **right click** on **mynodeapp** project in Codewind:
 
-![image-20200405185628005](images/image-20200405185628005-6105788.png)
+![image-20200915144833493](images/image-20200915144833493-0174113.png)
 
 These commands are **Appsody** commands. 
 
@@ -571,7 +600,7 @@ These commands are **Appsody** commands.
 
 You can navigate from that codewind menu to see different aspects of your application.
 
-![image-20200405190100754](images/image-20200405190100754-6106060.png)
+![image-20200915144916186](images/image-20200915144916186-0174156.png)
 
 First you can open your application (**Open Application**):
 
@@ -579,11 +608,27 @@ First you can open your application (**Open Application**):
 
 You can also see your project overview:
 
-![image-20200405190417352](images/image-20200405190417352-6106257.png)
+![image-20200915145149167](images/image-20200915145149167-0174309.png)
 
 You can open a container shell (**Container Shell**) and type several commands:
 
 ![image-20200405191339326](images/image-20200405191339326-6106819.png)
+
+If we click on Metrics, you will see the following CPU, Memory, Heap, :
+
+![image-20200915145806754](images/image-20200915145806754-0174686.png)
+
+You can also play with the performance: Click on performance and then click on the button to edit the parameters :
+
+![image-20200915151146818](images/image-20200915151146818-0175506.png)
+
+Then enter a **name** and click **Enter**:
+
+![image-20200915151223904](images/image-20200915151223904-0175544.png)
+
+And look at the results after 180 secondes:
+
+![image-20200915152106712](images/image-20200915152106712-0176066.png)
 
 
 
@@ -608,7 +653,7 @@ oc project
 Using project "labproj99" on server "https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443".
 ```
 
-In your application directory **newappproj**, login to your Docker registry in your cluster:
+In your application directory where you have **mynodeapp**, login to your Docker registry in your cluster:
 
 ``` 
 HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
@@ -639,7 +684,7 @@ Be sure to be on your application directory:
 
 ```bash
 cd
-cd codewind-workspace/mynewapp
+cd <your_directory>/mynodeapp
 ```
 
 
@@ -656,12 +701,15 @@ Results (example) : **it can take a few minutes**
 
 ```
 ...
-[Docker] Successfully built e833880d4c08
-[Docker] Successfully tagged default-route-openshift-image-registry.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud/labproj99/mynewapp:latest
-Pushing image default-route-openshift-image-registry.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud/labproj99/mynewapp
-Built docker image default-route-openshift-image-registry.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud/labproj99/mynewapp
-Found existing deployment manifest /Users/phil/codewind-workspace/mynewapp/app-deploy.yaml
-Updated existing deployment manifest /Users/phil/codewind-workspace/mynewapp/app-deploy.yaml
+[Docker]  ---> 00ae30f1cbb7
+[Docker] Successfully built 00ae30f1cbb7
+[Docker] Successfully tagged default-route-openshift-image-registry.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud/labproj99/mynodeapp:latest
+Pushing image default-route-openshift-image-registry.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud/labproj99/mynodeapp
+Built docker image default-route-openshift-image-registry.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud/labproj99/mynodeapp
+Running command: docker create --name mynodeapp-extract docker.io/kabanero/nodejs-express:0.4
+Running command: docker cp mynodeapp-extract:/config/app-deploy.yaml /Users/phil/sample/test/mynodeapp/app-deploy.yaml
+Running command: docker rm mynodeapp-extract -f
+Created deployment manifest: /Users/phil/sample/test/mynodeapp/app-deploy.yaml
 Attempting to get resource from Kubernetes ...
 Running command: kubectl get pods "-o=jsonpath='{.items[?(@.metadata.labels.name==\"appsody-operator\")].metadata.namespace}'" --all-namespaces
 Attempting to get resource from Kubernetes ...
@@ -669,15 +717,15 @@ Running command: kubectl get deployments "-o=jsonpath='{.items[?(@.metadata.name
 Attempting to get resource from Kubernetes ...
 Running command: kubectl get pod "-o=jsonpath='{.items[?(@.metadata.labels.name==\"appsody-operator\")].metadata.name}'" -n openshift-operators
 Attempting to get resource from Kubernetes ...
-Running command: kubectl exec -n openshift-operators -it appsody-operator-849cd8b475-zmtjc -- /bin/printenv WATCH_NAMESPACE
+Running command: kubectl exec -n openshift-operators -it appsody-operator-f5bd99cb9-hhb4h -- /bin/printenv WATCH_NAMESPACE
 An operator exists in namespace openshift-operators, that is watching all namespaces
 Attempting to apply resource in Kubernetes ...
-Running command: kubectl apply -f /Users/phil/codewind-workspace/mynewapp/app-deploy.yaml --namespace labproj99
-Appsody Deployment name is: mynewapp
-Running command: kubectl get rt mynewapp -o "jsonpath=\"{.status.url}\"" --namespace labproj99
+Running command: kubectl apply -f /Users/phil/sample/test/mynodeapp/app-deploy.yaml --namespace labproj99
+Appsody Deployment name is: mynodeapp
+Running command: kubectl get rt mynodeapp -o "jsonpath=\"{.status.url}\"" --namespace labproj99
 Attempting to get resource from Kubernetes ...
-Running command: kubectl get route mynewapp -o "jsonpath={.status.ingress[0].host}" --namespace labproj99
-Deployed project running at mynewapp-labproj99.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud
+Running command: kubectl get route mynodeapp -o "jsonpath={.status.ingress[0].host}" --namespace labproj99
+Deployed project running at mynodeapp-labproj99.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud
 ```
 
 
@@ -685,7 +733,7 @@ Deployed project running at mynewapp-labproj99.niceam-ba36b2ed0b6b09dbc627b56cee
 You can now get access to your application by using the URL from the last message of the deploy:
 
 ```https
-http:// mynewapp-labproj99.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud
+https://mynodeapp-labproj99.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud
 ```
 
  ![image-20191012185518963](images/image-20191012185518963-0899319.png)

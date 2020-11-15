@@ -26,19 +26,21 @@ As you can see on the picture, you will connect to the OpenShift Cluster Web UI 
 
 The OpenShift platform that we are going to use has been built on IBM Cloud. 
 
+```http
+https://cloud.ibm.com
+```
+
 Type your User ID password and click Login button given by the **instructor**:
 
-![image-20200407102322823](images/image-20200407102322823-6247802.png)
+![image-20201115150426125](images/image-20201115150426125-5449066.png)
 
 You should see the following **Dashboard**:
 
-![image-20200405110704901](images/image-20200405110704901-6077624.png)
+![image-20201115150646269](images/image-20201115150646269-5449206.png)
 
 
 
-The instructor will also give you some informations:
-
-- a project name in the format **labproj<xx>**. Each project is associated to the corresponding labuser<xx>. 
+The instructor will also give you a project name like **labproj<xx>**. Each person has its own  project with a specific number <xx>.
 
 > Please use that project that has been assigned to you during all labs.
 
@@ -48,7 +50,7 @@ The instructor will also give you some informations:
 
 To get access to the OpenShift Console, first connect to **IBM Cloud with your own credentials**. 
 
-The instructor should have authorized you to get access to the Kevin Account. On the top right of the screen, click your name and then you should see the Kevin's account (click on the Kevin's account):
+The instructor should have authorized you to get access to the **Kevin** Account. On the top right of the screen, click your name and then you should see the Kevin's account (click on the Kevin's account):
 
 ![image-20200405143523141](images/image-20200405143523141-6090123.png)
 
@@ -56,7 +58,7 @@ Then, the following page should appear (with one cluster)
 
 ![image-20200405143928697](images/image-20200405143928697-6090368.png)
 
-Click on that cluster to show the list:
+Click on that **cluster** to show the list:
 
 ![image-20200405144353208](images/image-20200405144353208-6090633.png)
 
@@ -78,7 +80,7 @@ To get access to the OpenShift console click on the blue button (OpenShift web c
 
 > Please take a note of the link because we will use it very often.
 
-Of course you can navigate in the console and switch between the 2 profile : Administrator and Developer :
+Of course you can navigate in the console and switch between the 2 profiles : Administrator and Developer :
 
 ![image-20200405145301447](images/image-20200405145301447-6091181.png)
 
@@ -270,9 +272,9 @@ You can have a look to the github **sample** repository.
 
 
 
-You can see that the builder (S2I) is version 10 for Node.js in the **build section**.
+You can see that the builder (S2I) is version 12 for Node.js in the **build section**.
 
-![image-20200405153319659](images/image-20200405153319659-6093599.png)
+![image-20200911153538305](images/image-20200911153538305-9831338.png)
 
 In the **Git section**, click in the **Try Sample** so you get the sample git repo URL filled in:
 

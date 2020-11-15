@@ -95,32 +95,30 @@ After a few seconds:
 
 ```bash
 oc new-app https://github.com/sclorg/nodejs-ex -l name=myapp99
---> Found image 21a1636 (20 minutes old) in image stream "labproj99/nodejs" under tag "latest" for "nodejs"
+--> Found image 92fa44e (6 days old) in image stream "openshift/nodejs" under tag "12" for "nodejs"
 
-    Node.js 10 
+    Node.js 12 
     ---------- 
-    Node.js 10 available as container is a base platform for building and running various Node.js 10 applications and frameworks. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+    Node.js 12 available as container is a base platform for building and running various Node.js 12 applications and frameworks. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
 
-    Tags: builder, nodejs, nodejs10
+    Tags: builder, nodejs, nodejs12
 
     * The source repository appears to match: nodejs
     * A source build using source code from https://github.com/sclorg/nodejs-ex will be created
       * The resulting image will be pushed to image stream tag "nodejs-ex:latest"
       * Use 'oc start-build' to trigger a new build
-    * This image will be deployed in deployment config "nodejs-ex"
-    * Port 8080/tcp will be load balanced by service "nodejs-ex"
-      * Other containers can access this service through the hostname "nodejs-ex"
 
 --> Creating resources with label name=myapp99 ...
     imagestream.image.openshift.io "nodejs-ex" created
     buildconfig.build.openshift.io "nodejs-ex" created
-    deploymentconfig.apps.openshift.io "nodejs-ex" created
+    deployment.apps "nodejs-ex" created
     service "nodejs-ex" created
 --> Success
     Build scheduled, use 'oc logs -f bc/nodejs-ex' to track its progress.
     Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
      'oc expose svc/nodejs-ex' 
     Run 'oc status' to view your app.
+#
 ```
 
 
@@ -238,16 +236,15 @@ oc get pods
 Results:
 
 ```bash
-oc get pods
-NAME                 READY   STATUS      RESTARTS   AGE
-nodejs-ex-1-build    0/1     Completed   0          2m23s
-nodejs-ex-1-deploy   0/1     Completed   0          93s
-nodejs-ex-1-xfckp    1/1     Running     0          90s
+# oc get pods
+NAME                         READY   STATUS      RESTARTS   AGE
+nodejs-ex-1-build            0/1     Completed   0          101s
+nodejs-ex-6df7ccf8bc-p5m8b   1/1     Running     0          35s
 ```
 
 
 
-You will notice that one pod (job) has been completed for the build stage and another one for the deploy (push) stage.
+You will notice that one pod (job) has been completed for the **build** stage.
 
 The other pod is running (1/1) and this is our Node.JS application.
 
@@ -268,8 +265,14 @@ route.route.openshift.io/nodejs-ex exposed
 
 But you don't know the route url yet. 
 
-```
+```bash
 oc get route
+```
+
+Results
+
+```
+# oc get route
 NAME        HOST/PORT                                        PATH      SERVICES    PORT       TERMINATION   WILDCARD
 nodejs99    nodejs99-labproj99.niceam-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.us-south.containers.appdomain.cloud           nodejs99    8080-tcp                 None
 
@@ -297,17 +300,17 @@ Example:
 
 ## Task #4 - OpenShift Web Console
 
-Goto the OpenShift Web Console:
+Goto the OpenShift Web Console (Developer puis selectionner son project labproj<xx>)
 
-![image-20200405171643340](images/image-20200405171643340-6099803.png)
+![image-20201115181524025](images/image-20201115181524025-5460524.png)
 
 You can see your application in the Topology section. 
 
-Notice that we use a **Deployment Config** (DC).
+Notice that we use also a **Deployment** (D) like in the first lab.
 
 Go to the Administrator profile, select your project<xx> in the **Home>Projects section**:
 
-![image-20200405172049589](images/image-20200405172049589-6100049.png)
+![image-20201115181709065](images/image-20201115181709065-5460629.png)
 
 The Dashboard of your project<xx> is very interesting because you can see a lot of informations: 
 
@@ -317,63 +320,59 @@ The Dashboard of your project<xx> is very interesting because you can see a lot 
 - Activity (from the events)
 - Quotas
 
-![image-20200405172438635](images/image-20200405172438635-6100278.png)
+![image-20201115181806984](images/image-20201115181806984-5460687.png)
 
 Click on Pods to look at the **Pods** in Inventory in your labproj<xx>:
 
-![image-20200405172647830](images/image-20200405172647830-6100407.png)
+![image-20201115181928571](images/image-20201115181928571-5460768.png)
 
 Now on the left pane, click on the **Deployment Configs** 
 
-![image-20200405173545704](images/image-20200405173545704-6100945.png)
+![image-20201115182009605](images/image-20201115182009605-5460809.png)
 
 
 
-The Deployment Config is similar to a Deployment and it includes different mechanisms like replication controller, the Pods and some environment variables. Lets go thru the different tabs:
+Let's click on the deployment: 
 
-![image-20200405173904921](images/image-20200405173904921-6101144.png)
+![image-20201115182129168](images/image-20201115182129168-5460889.png)
 
 
 
 The YAML definitions:
 
-![image-20200405174009238](images/image-20200405174009238-6101209.png)
+![image-20201115182212570](images/image-20201115182212570-5460932.png)
 
 
 
-The Replication Controller Tab:
+The Replica Sets Tab:
 
-![image-20200405174045083](images/image-20200405174045083-6101245.png)
+![image-20201115182236981](images/image-20201115182236981-5460957.png)
 
 The Pods Tab: 
 
-![image-20200405174129679](images/image-20200405174129679-6101289.png)
+
 
 The Environment Tab and finally the Events Tab (this log of events is concerning the activity around the deployment of the Pods):
 
-![image-20200405174306179](images/image-20200405174306179-6101386.png)
+![image-20201115182537918](images/image-20201115182537918-5461137.png)
 
 
 
 If you go back to the Pods Tab:
 
-![image-20200405174405414](images/image-20200405174405414-6101445.png)
+![image-20201115182418058](images/image-20201115182418058-5461058.png)
 
-You can notice that you have one pod that is running. Click on that Pod:
+You can notice that you have one pod that is running. **Click on that Pod**:
 
-![image-20200405174550548](images/image-20200405174550548-6101550.png)
+![image-20201115182630165](images/image-20201115182630165-5461190.png)
 
 Now click in the log (concerning the application)
 
-![image-20200405174736979](images/image-20200405174736979-6101657.png)
-
-
+![image-20201115182703185](images/image-20201115182703185-5461223.png)
 
 And then finally, click on the Terminal Tab to get access inside the container (try typing several linux commands):
 
-![image-20200405175015076](images/image-20200405175015076-6101815.png)
-
-
+![image-20201115182740011](images/image-20201115182740011-5461260.png)
 
 
 
@@ -381,15 +380,17 @@ And then finally, click on the Terminal Tab to get access inside the container (
 
 ## Task #5 - Scaling your application
 
-To learn about scaling your application, on the left pane, click on the Deployment Configs:
+To learn about scaling your application, on the left pane, click on the **Deployment**:
 
-![image-20200405175246396](images/image-20200405175246396-6101966.png)
+![image-20201115182825721](images/image-20201115182825721-5461305.png)
 
 
 
 Finally, increase the number of pods (**not too much**: 2 for instance)
 
 ![image-20200405175523790](images/image-20200405175523790-6102123.png)
+
+
 
 And after a while, you will see 2 active pods.
 
@@ -421,7 +422,7 @@ Click on `Delete` and you should see breifly your pod terminating.
 
 A new pod is automatically started !!! Because the number of replicaset has been defined to **2** , even if a pod is crashing or has been deleted, it will be replace automatically by a new one. 
 
-![image-20200405180245779](images/image-20200405180245779-6102565.png)
+![image-20201115182948172](images/image-20201115182948172-5461388.png)
 
 
 

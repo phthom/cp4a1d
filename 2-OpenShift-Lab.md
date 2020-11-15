@@ -298,7 +298,7 @@ Example:
 
 
 
-## Task #4 - OpenShift Web Console
+## Task #3 - OpenShift Web Console
 
 Goto the OpenShift Web Console (Developer puis selectionner son project labproj<xx>)
 
@@ -378,7 +378,7 @@ And then finally, click on the Terminal Tab to get access inside the container (
 
 
 
-## Task #5 - Scaling your application
+## Task #4 - Scaling your application
 
 To learn about scaling your application, on the left pane, click on the **Deployment**:
 

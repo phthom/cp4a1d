@@ -239,7 +239,7 @@ oc login --token=pCUnhtWtWs8H4FtcJmbPvvSFpXVaJFX7vacibBJSW1A --server=https://c1
 Add your Kabanero Collection Hub Repository in the Appsody configuration:
 
 ```
-appsody repo add kabanero https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.6.5/kabanero-stack-hub-index.yaml
+appsody repo add kabanero  https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
 ```
 
 List all your Collections:
@@ -506,6 +506,8 @@ http://localhost:3000
 
 ![image-20191012173918846](images/image-20191012173918846-0894758.png)
 
+Type **Ctrl+C** dans le terminal pour terminer l'application.
+
 
 
 ## Task #6 - Installing Codewind
@@ -530,29 +532,43 @@ Click on install for the **latest Codewind** version.
 
 Codewind requires the installation of **additional Docker images** to run. Choose Install when prompted to complete the installation. The installation may take a few minutes to complete.
 
-Codewind creates a folder called **codewind-workspace** within your **home directory** (C:\codewind-workspace on Windows or /Users/xxx on MacOS) to contain your projects. When the installation is complete, you can open the codewind-workspace folder or a project within the workspace as your VS Code workspace. The tools offer to open the workspace for you if it’s not open already.
+When the installation is complete, you can open the **codewind-workspace **folder or a project within the workspace as your VS Code workspace. The tools offer to open the workspace for you if it’s not open already.
 
 ![image-20200915115355006](images/image-20200915115355006-0163635.png)
 
 You will see Codewind at the bottom left part of the screen. Click on CodeWind:
 
-![image-20200915120214046](images/image-20200915120214046-0164134.png)
+![image-20201115185234317](images/image-20201115185234317-5462754.png)
 
 
 
 Start the local connection to docker by clicking on the button on the right side of local:
 
-![image-20200915120456737](images/image-20200915120456737-0164296.png) 
+![image-20201115185302745](images/image-20201115185302745-5462782.png) 
 
-Then Click on **No Projects** to create a new project: and then choose **Kabanero** hub.
 
-Then select **Kabanero Node.js Express simple template** in the **Kabanero** hub
 
-![image-20200915120922239](images/image-20200915120922239-0164562.png)
+Then Click on **No Projects** to create a new project.
 
-Finally type a name for your project like **myapp** and put it in a **directory** of you choice.
+Then select **Kabanero Stack-hub Node.js Express simple template** in the list:
 
-![image-20200915121538743](images/image-20200915121538743-0164938.png)
+![image-20201115185555265](images/image-20201115185555265-5462955.png)
+
+
+
+Finally type a name for your project like **myapp** directory:
+
+![image-20201115185723659](images/image-20201115185723659-5463043.png)
+
+and put it in a **directory** of you choice (like myprojects)  and **select Parent Directory**
+
+![image-20201115185805125](images/image-20201115185805125-5463085.png)
+
+Then on the top left, you will see your directory **myapp** :
+
+![image-20201115190043625](images/image-20201115190043625-5463243.png)
+
+
 
 
 
@@ -560,17 +576,13 @@ Finally type a name for your project like **myapp** and put it in a **directory*
 
 You should see your application building automatically:
 
-![image-20200915121629421](images/image-20200915121629421-0164989.png)
+![image-20201115190336836](images/image-20201115190336836-5463416.png)
 
-After a few seconds, your cloud native application should be building and running: you can look at the log during the building:
+After a few seconds, your cloud native application should be building and **running**.
 
-![image-20200915121903095](images/image-20200915121903095-0165143.png)
+Move your cursor on myapp (running) item and click on the end point to get access to the application:
 
-As you can see your code is running and of course the build has been done successfully. 
-
-![image-20200915142431396](images/image-20200915142431396-0172671.png)
-
-Move your cursor on mynodeapp (running) item and click on the end point to get access to the application:
+![image-20201115190414881](images/image-20201115190414881-5463454.png)
 
  A browser session will open shortly:
 
@@ -588,9 +600,9 @@ Save your project. Automatically a new build of your project is started and you 
 
 ![image-20191012185518963](images/image-20191012185518963-0899319.png)
 
-Now let do some experiments, **right click** on **mynodeapp** project in Codewind:
+Now let do some experiments, **right click** on **myapp** project in Codewind:
 
-![image-20200915144833493](images/image-20200915144833493-0174113.png)
+![image-20201115190536012](images/image-20201115190536012-5463536.png)
 
 These commands are **Appsody** commands. 
 
@@ -600,7 +612,7 @@ These commands are **Appsody** commands.
 
 You can navigate from that codewind menu to see different aspects of your application.
 
-![image-20200915144916186](images/image-20200915144916186-0174156.png)
+![image-20201115190633189](images/image-20201115190633189-5463593.png)
 
 First you can open your application (**Open Application**):
 
@@ -684,7 +696,7 @@ Be sure to be on your application directory:
 
 ```bash
 cd
-cd <your_directory>/mynodeapp
+cd myprojects/myapp
 ```
 
 
@@ -692,7 +704,7 @@ cd <your_directory>/mynodeapp
 Now you can deploy your appliocation to the remote OpenShift cluster in your project (**change xx** with your number)
 
 ```bash
-appsody deploy -t $HOST/labproj<xx>/mynewapp --push --pull-url image-registry.openshift-image-registry.svc:5000 -n labproj<xx>
+appsody deploy -t $HOST/labproj<xx>/myapp --push --pull-url image-registry.openshift-image-registry.svc:5000 -n labproj<xx>
 ```
 
 
@@ -721,19 +733,19 @@ Running command: kubectl exec -n openshift-operators -it appsody-operator-f5bd99
 An operator exists in namespace openshift-operators, that is watching all namespaces
 Attempting to apply resource in Kubernetes ...
 Running command: kubectl apply -f /Users/phil/sample/test/mynodeapp/app-deploy.yaml --namespace labproj99
-Appsody Deployment name is: mynodeapp
-Running command: kubectl get rt mynodeapp -o "jsonpath=\"{.status.url}\"" --namespace labproj99
+Appsody Deployment name is: myapp
+Running command: kubectl get rt myapp -o "jsonpath=\"{.status.url}\"" --namespace labproj99
 Attempting to get resource from Kubernetes ...
-Running command: kubectl get route mynodeapp -o "jsonpath={.status.ingress[0].host}" --namespace labproj99
-Deployed project running at mynodeapp-labproj99.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud
+Running command: kubectl get route myapp -o "jsonpath={.status.ingress[0].host}" --namespace labproj99
+Deployed project running at myapp-labproj99.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud
 ```
 
-
+It can take a **few nimutes** to push and deploy the application. 
 
 You can now get access to your application by using the URL from the last message of the deploy:
 
 ```https
-https://mynodeapp-labproj99.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud
+https://myapp-labproj99.nicebb-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-gb.containers.appdomain.cloud
 ```
 
  ![image-20191012185518963](images/image-20191012185518963-0899319.png)

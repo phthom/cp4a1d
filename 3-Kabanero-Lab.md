@@ -572,7 +572,7 @@ Then on the top left, you will see your directory **myapp** :
 
 
 
-##Task #7 - Managing your project 
+## Task #7 - Managing your project 
 
 You should see your application building automatically:
 
@@ -608,7 +608,7 @@ These commands are **Appsody** commands.
 
 
 
-##Task #8 - Managing your application
+## Task #8 - Managing your application
 
 You can navigate from that codewind menu to see different aspects of your application.
 

@@ -6,6 +6,8 @@
 
 # Kabanero-CodeWind-Appsody Tools 
 
+CP4A Version 4.3+
+
 
 
 
@@ -198,7 +200,7 @@ You should see the following page:
 
 
 
-On the left pane, click on **Instance**:
+On the left pane, click on **Instances**:
 
 ![image-20200405182247953](images/image-20200405182247953-6103768.png)
 
@@ -210,10 +212,10 @@ In the middle of the screen, there is a list of links under instance:
 
 
 
-Take a note of the **Appsody Hub** that will be needed in the next steps. It looks like this:
+Take a note of the **Appsody URL** that will be needed in the next steps. It looks like this:
 
 ``` http
-https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
+https://github.com/icp4apps/stack-hub/releases/download/0.22.0/icp4apps-stack-hub-index.yaml
 ```
 
 
@@ -239,7 +241,7 @@ oc login --token=pCUnhtWtWs8H4FtcJmbPvvSFpXVaJFX7vacibBJSW1A --server=https://c1
 Add your Kabanero Collection Hub Repository in the Appsody configuration:
 
 ```
-appsody repo add kabanero  https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
+appsody repo add kabanero  https://github.com/icp4apps/stack-hub/releases/download/0.22.0/icp4apps-stack-hub-index.yaml
 ```
 
 List all your Collections:
@@ -251,15 +253,15 @@ appsody list kabanero
 Results:
 
 ``` bash
-appsody list kabanero
+ appsody list kabanero
 
-REPO    	ID               	VERSION  	TEMPLATES               	DESCRIPTION                                                 
-kabanero	java-openliberty 	0.2.12   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
-        	                 	         	                        	using Maven                                                 
-kabanero	java-spring-boot2	0.3.29   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
-kabanero	nodejs           	0.3.6    	*simple                 	Runtime for Node.js applications                            
-kabanero	nodejs-express   	0.4.8    	kafka, scaffold, *simple	Express web framework for Node.js                           
-kabanero	quarkus          	0.3.6    	*default, kafka         	Quarkus runtime for running Java applications               
+REPO    	ID                        	VERSION  	TEMPLATES               	DESCRIPTION                                                 
+kabanero	java-openliberty          	0.2.17   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
+        	                          	         	                        	using Maven                                                 
+kabanero	java-spring-boot2         	0.3.31   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
+kabanero	java-websphere-traditional	0.3.2    	*default                	tWAS & OpenJ9 using Maven                                   
+kabanero	nodejs                    	0.4.1    	*simple                 	Runtime for Node.js applications                            
+kabanero	nodejs-express            	0.4.10   	kafka, scaffold, *simple	Express web framework for Node.js          
 ```
 
 
@@ -289,13 +291,13 @@ appsody repo list
 Results:
 
 ```bash
-appsody repo list
+ appsody repo list
 
-NAME        	URL                                                                                                    
-*incubator  	https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml                        
-dev.local   	file:///Users/phil/.appsody/stacks/dev.local/dev.local-index.yaml                                      
-experimental	https://github.com/appsody/stacks/releases/latest/download/experimental-index.yaml                     
-kabanero    	https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
+NAME        	URL                                                                                         
+*kabanero   	https://github.com/icp4apps/stack-hub/releases/download/0.22.0/icp4apps-stack-hub-index.yaml
+dev.local   	file:///Users/phil/.appsody/stacks/dev.local/dev.local-index.yaml                           
+experimental	https://github.com/appsody/stacks/releases/latest/download/experimental-index.yaml          
+incubator   	https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml  
 ```
 
 You can see all the stacks by using the following commands:
@@ -318,25 +320,25 @@ experimental	rocket                        	0.1.1    	*simple                 	R
 experimental	rust                          	0.3.0    	*simple                 	Runtime for Rust applications                               
 experimental	rust-tide                     	0.3.0    	*default                	Tide web framework for Rust                                 
 experimental	vertx                         	0.1.4    	*default                	Eclipse Vert.x runtime for running Java applications        
-*incubator  	java-microprofile [Deprecated]	0.2.27   	*default                	Eclipse MicroProfile on Open Liberty & OpenJ9 using Maven   
-*incubator  	java-openliberty              	0.2.15   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
+incubator   	java-microprofile [Deprecated]	0.2.27   	*default                	Eclipse MicroProfile on Open Liberty & OpenJ9 using Maven   
+incubator   	java-openliberty              	0.2.17   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
             	                              	         	                        	using Maven                                                 
-*incubator  	java-spring-boot2             	0.3.30   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
-*incubator  	kitura                        	0.2.6    	*default                	Runtime for Kitura applications                             
-*incubator  	node-red                      	0.1.3    	*simple                 	Node-RED runtime for running flows                          
-*incubator  	nodejs                        	0.4.0    	*simple                 	Runtime for Node.js applications                            
-*incubator  	nodejs-express                	0.4.13   	kafka, scaffold, *simple	Express web framework for Node.js                           
-*incubator  	nodejs-loopback               	0.3.0    	*scaffold               	LoopBack 4 API Framework for Node.js                        
-*incubator  	python-flask                  	0.2.4    	*simple                 	Flask web Framework for Python                              
-*incubator  	quarkus                       	0.5.1    	*default, kafka         	Quarkus runtime for running Java applications               
-*incubator  	starter                       	0.1.3    	*simple                 	Runnable starter stack, copy to create a new stack          
-*incubator  	swift                         	0.3.0    	*simple                 	Appsody runtime for Swift applications                      
-kabanero    	java-openliberty              	0.2.12   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
+incubator   	java-spring-boot2             	0.3.30   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
+incubator   	kitura                        	0.2.6    	*default                	Runtime for Kitura applications                             
+incubator   	node-red                      	0.1.3    	*simple                 	Node-RED runtime for running flows                          
+incubator   	nodejs                        	0.4.0    	*simple                 	Runtime for Node.js applications                            
+incubator   	nodejs-express                	0.4.13   	kafka, scaffold, *simple	Express web framework for Node.js                           
+incubator   	nodejs-loopback               	0.4.0    	*scaffold               	LoopBack 4 API Framework for Node.js                        
+incubator   	python-flask                  	0.2.4    	*simple                 	Flask web Framework for Python                              
+incubator   	quarkus                       	0.5.1    	*default, kafka         	Quarkus runtime for running Java applications               
+incubator   	starter                       	0.1.3    	*simple                 	Runnable starter stack, copy to create a new stack          
+incubator   	swift                         	0.3.0    	*simple                 	Appsody runtime for Swift applications                      
+*kabanero   	java-openliberty              	0.2.17   	*default, kafka         	Eclipse MicroProfile & Jakarta EE on Open Liberty & OpenJ9  
             	                              	         	                        	using Maven                                                 
-kabanero    	java-spring-boot2             	0.3.29   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
-kabanero    	nodejs                        	0.3.6    	*simple                 	Runtime for Node.js applications                            
-kabanero    	nodejs-express                	0.4.8    	kafka, scaffold, *simple	Express web framework for Node.js                           
-kabanero    	quarkus                       	0.3.6    	*default, kafka         	Quarkus runtime for running Java applications      
+*kabanero   	java-spring-boot2             	0.3.31   	*default, kafka, kotlin 	Spring Boot using OpenJ9 and Maven                          
+*kabanero   	java-websphere-traditional    	0.3.2    	*default                	tWAS & OpenJ9 using Maven                                   
+*kabanero   	nodejs                        	0.4.1    	*simple                 	Runtime for Node.js applications                            
+*kabanero   	nodejs-express                	0.4.10   	kafka, scaffold, *simple	Express web framework for Node.js        
 ```
 
 
@@ -374,23 +376,24 @@ appsody init kabanero/nodejs-express
 Results:
 
 ```bash
-# appsody init kabanero/nodejs-express
-No stack requirements set. Skipping...
+#  appsody init kabanero/nodejs-express
+Checking stack requirements...
+Docker requirements met
+Appsody requirements met
 Running appsody init...
-Downloading nodejs-express template project from https://github.com/kabanero-io/collections/releases/download/0.6.3/nodejs-express.v0.2.10.templates.simple.tar.gz
+Downloading nodejs-express template project from https://github.com/kabanero-io/collections/releases/download/0.10.2/nodejs-express.v0.4.10.templates.simple.tar.gz
 Download complete. Extracting files from /Users/phil/myprojects/mynewapp/nodejs-express.tar.gz
 Setting up the development environment
 Your Appsody project name has been set to mynewapp
-Pulling docker image docker.io/kabanero/nodejs-express:0.2
-Running command: docker pull docker.io/kabanero/nodejs-express:0.2
-0.2: Pulling from kabanero/nodejs-express
-Digest: sha256:e146ec0b008cd122f3c87b50e2d69102141f71dfd44239d1dbaeac97d06737a0
-Status: Image is up to date for kabanero/nodejs-express:0.2
-docker.io/kabanero/nodejs-express:0.2
-[Warning] The stack image does not contain APPSODY_PROJECT_DIR. Using /project
-Running command: docker run --rm --entrypoint /bin/bash docker.io/kabanero/nodejs-express:0.2 -c "find /project -type f -name .appsody-init.sh"
+Pulling docker image docker.io/kabanero/nodejs-express:0.4
+Running command: docker pull docker.io/kabanero/nodejs-express:0.4
+0.4: Pulling from kabanero/nodejs-express
+Digest: sha256:3c1d5d2c2ef19d71a4677fb37fa9dbaf0b2a4051734beab7c95ed7a0dfde1f01
+Status: Image is up to date for kabanero/nodejs-express:0.4
+docker.io/kabanero/nodejs-express:0.4
+Running command: docker run --rm --entrypoint /bin/bash docker.io/kabanero/nodejs-express:0.4 -c "find /project -type f -name .appsody-init.sh"
 Successfully added your project to /Users/phil/.appsody/project.yaml
-Your Appsody project ID has been set to 20200405184248.96861400
+Your Appsody project ID has been set to 20201202221337.59360700
 Successfully initialized Appsody project with the kabanero/nodejs-express stack and the default template.
 
 ```
@@ -468,24 +471,31 @@ Results:
 ```bash
 # appsody run
 Running development environment...
-Pulling docker image docker.io/kabanero/nodejs-express:0.2
-Running command: docker pull docker.io/kabanero/nodejs-express:0.2
-0.2: Pulling from kabanero/nodejs-express
-Digest: sha256:e146ec0b008cd122f3c87b50e2d69102141f71dfd44239d1dbaeac97d06737a0
-Status: Image is up to date for kabanero/nodejs-express:0.2
-docker.io/kabanero/nodejs-express:0.2
-Running command: docker run --rm -p 3000:3000 -p 8080:8080 -p 9229:9229 --name mynewapp -v /Users/phil/myprojects/mynewapp/:/project/user-app -v appsody-mynewapp-20200405184514.77100800:/project/user-app/node_modules -v appsody-controller-0.3.4:/.appsody -t --entrypoint /.appsody/appsody-controller docker.io/kabanero/nodejs-express:0.2 "--mode=run"
+Pulling docker image docker.io/kabanero/nodejs-express:0.4
+Running command: docker pull docker.io/kabanero/nodejs-express:0.4
+0.4: Pulling from kabanero/nodejs-express
+Digest: sha256:3c1d5d2c2ef19d71a4677fb37fa9dbaf0b2a4051734beab7c95ed7a0dfde1f01
+Status: Image is up to date for kabanero/nodejs-express:0.4
+docker.io/kabanero/nodejs-express:0.4
+Running command: docker run --rm -p 9229:9229 -p 3000:3000 -p 8080:8080 --name mynewapp -v /Users/phil/myprojects/mynewapp/:/project/user-app -v appsody-mynewapp-20201202221530.79968500:/project/user-app/node_modules -v appsody-controller-0.3.5:/.appsody -t --entrypoint /.appsody/appsody-controller docker.io/kabanero/nodejs-express:0.4 "--mode=run"
 [Container] Running APPSODY_PREP command: npm install --prefix user-app
-added 170 packages from 578 contributors and audited 295 packages in 4.323s
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules/fsevents):
+[Container] npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[Container] 
+[Container] added 162 packages from 131 contributors and audited 163 packages in 6.568s
+[Container] 
+[Container] 16 packages are looking for funding
+[Container]   run `npm fund` for details
+[Container] 
 [Container] found 1 low severity vulnerability
 [Container]   run `npm audit fix` to fix them, or `npm audit` for details
-[Container] Running command:  npm start
+Running command:  npm start
 [Container] 
-[Container] > nodejs-express@0.2.10 start /project
+[Container] > nodejs-express@0.4.9 start /project
 [Container] > node server.js
 [Container] 
-[Container] [Sun Apr  5 16:45:22 2020] com.ibm.diagnostics.healthcenter.loader INFO: Node Application Metrics 5.1.1.202003102146 (Agent Core 4.0.5)
-[Container] [Sun Apr  5 16:45:23 2020] com.ibm.diagnostics.healthcenter.mqtt INFO: Connecting to broker localhost:1883
+[Container] [Wed Dec  2 21:15:42 2020] com.ibm.diagnostics.healthcenter.loader INFO: Node Application Metrics 5.1.1.202010091943 (Agent Core 4.0.5)
+[Container] [Wed Dec  2 21:15:43 2020] com.ibm.diagnostics.healthcenter.mqtt INFO: Connecting to broker localhost:1883
 [Container] App started on PORT 3000
 
 ```
